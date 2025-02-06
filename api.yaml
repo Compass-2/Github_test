@@ -116,16 +116,3 @@ paths:
                     type: string
         '404':
           description: User not found
-    delete:
-      summary: Delete a user by ID
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-      responses:
-        '204':
-          description: User deleted successfully
-        '404':
-          description: User not found
