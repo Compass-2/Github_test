@@ -67,25 +67,6 @@ paths:
       responses:
         '200':
           description: User updated
-  /users/{userId}/posts:
-    parameters:
-      - name: userId
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
-    get:
-      summary: Get posts by user ID
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Post"
 components:
   schemas:
     User:
