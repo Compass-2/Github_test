@@ -1,58 +1,131 @@
 openapi: 3.0.0
 info:
-  title: Advanced API
-  version: 1.0.0
-  description: This is an advanced API with servers and external documentation.
-  contact:
-    name: API Support
-    url: 'http://www.example.com/support'
-  license:
-    name: Apache 2.0
-    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+  title: Sample API
+  version: 1.1.0
 servers:
-  - url: 'https://api.example.com/v1'
-    description: Production server
-  - url: 'https://api.staging.example.com/v1'
-    description: Staging server
-externalDocs:
-  description: Find more info here
-  url: 'http://www.example.com/docs'
+  - url: 'http://localhost:3000'
 paths:
   /users:
     get:
-      summary: Get all users
+      summary: Retrieve a list of users
       responses:
         '200':
-          description: Successful response
+          description: List of users
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
     post:
-      summary: Create a user
+      summary: Create a new user
       requestBody:
+        description: User object that needs to be added to the store
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/NewUser'
+              type: object
+              properties:
+                name:
+                  type: string
       responses:
         '201':
-          description: User created
-  /users/{userId}:
-    parameters:
-      - name: userId
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
-    get:
-      summary: Get a user by ID
-      responses:
-        '200':
-          description: Successful response
+          description: User created successfully
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+  /users/{id}:
+    put:
+      summary: Update an existing user
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: User object that needs to be updated
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+      responses:
+        '200':
+          description: User updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+        '404':
+          description: User not found
+    patch:
+      summary: Partially update an existing user
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: User object that needs to be updated
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                  format: email
+      responses:
+        '200':
+          description: User updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  email:
+                    type: string
+        '404':
+          description: User not found
+    delete:
+      summary: Delete a user by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: User deleted successfully
+        '404':
+          description: User not found
