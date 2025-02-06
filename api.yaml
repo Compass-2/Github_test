@@ -46,39 +46,6 @@ paths:
                     type: integer
                   name:
                     type: string
-  /users/{id}:
-    put:
-      summary: Update an existing user
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-      requestBody:
-        description: User object that needs to be updated
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
-      responses:
-        '200':
-          description: User updated successfully
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                  name:
-                    type: string
-        '404':
-          description: User not found
     patch:
       summary: Partially update an existing user
       parameters:
