@@ -56,18 +56,3 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
-    components:
-      schemas:
-        User:
-          type: object
-          properties:
-            id:
-              type: integer
-            name:
-              type: string
-        NewUser:
-          type: object
-          properties:
-            name:
-              type: string
-    
